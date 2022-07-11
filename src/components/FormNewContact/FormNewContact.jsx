@@ -1,6 +1,7 @@
 // import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+// import { initialState } from './initialState';
 
 // export class FormNewContact extends Component {
 
@@ -10,45 +11,31 @@ import { useState } from 'react';
 //   };
 
 
-export function FormNewContact({ onSubmit }) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+export function FormNewContact({ onSubmit, initialState }) {
+  const [state, setState] = useState({ ...initialState });
+  const { name, number } = state;
 
 
-  const handleChange = e => {
-    const { name, value } = e.currentTarget;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
+  const handleChange = ({ target }) => {
+    const { name, value, type, checked } = target;
+    const newValue = type === "checkbox" ? checked : value;
+    setState(prevState => ({
+      ...prevState,
+      [name]: newValue
+    }))
+  }
 
-      case 'number':
-        setNumber(value);
-        break;
-
-      default:
-        break;
-    }
-
-    // this.setState({ [name]: value });
-
-  };
-
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // this.props.onSubmit(this.state);
-    onSubmit({ name: name, number: number });
-
-    reset();
-    // this.reset();
+    onSubmit({ ...state });
+    reset()
   };
-
   const reset = () => {
-    setName('');
-    setNumber('');
-    // this.setState({ name: '', number: '' });
-  };
-
+    setState({
+      name: '',
+      number: '',
+    })
+  }
 
 
   // render() {
