@@ -31,10 +31,7 @@ export function FormNewContact({ onSubmit, initialState }) {
     reset()
   };
   const reset = () => {
-    setState({
-      name: '',
-      number: '',
-    })
+    setState({ ...initialState })
   }
 
 
