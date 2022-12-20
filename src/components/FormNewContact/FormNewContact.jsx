@@ -1,20 +1,9 @@
-// import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-// import { initialState } from './initialState';
-
-// export class FormNewContact extends Component {
-
-//   state = {
-//     name: '',
-//     number: '',
-//   };
-
 
 export function FormNewContact({ onSubmit, initialState }) {
   const [state, setState] = useState({ ...initialState });
   const { name, number } = state;
-
 
   const handleChange = ({ target }) => {
     const { name, value, type, checked } = target;
@@ -34,13 +23,8 @@ export function FormNewContact({ onSubmit, initialState }) {
     setState({ ...initialState })
   }
 
-
-  // render() {
-  // const { name, number } = this.state;
-
   return (
     <form onSubmit={handleSubmit}>
-      {/* <form onSubmit={this.handleSubmit}> */}
       <label>
         Name
         <input
@@ -51,7 +35,6 @@ export function FormNewContact({ onSubmit, initialState }) {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           onChange={handleChange}
-        // onChange={this.handleChange}
         />
       </label>
       <label>
@@ -64,13 +47,11 @@ export function FormNewContact({ onSubmit, initialState }) {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           onChange={handleChange}
-        // onChange={this.handleChange}
         />
       </label>
       <button type="submit">Add contact</button>
     </form>
   );
-  // }
 }
 
 FormNewContact.propTypes = {
